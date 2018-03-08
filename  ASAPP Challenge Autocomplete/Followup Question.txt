@@ -1,0 +1,16 @@
+1. How would you evaluate your autosuggest server? If you made another version, how would you compare the two to decide which is better?
+	
+A good server stands out from others if it can run faster, take up less memories, offer user higher accuracy of text suggest. Before I built Hidden Markov Model for autocomplete I also built and tested on other model using tried trees, and I found that the former has higher accuracy in making suggestions—it suggest more about what user expect to say. Also in practice, the tree method takes up more memories. Another
+way of making comparison is to calculate the time each server used up when making suggestion on every keystroke.
+
+2. One way to improve the autosuggest server is to give topic-specific suggestions. How would you design an auto-categorization server? It should take a list of messages and return a TopicId. (Assume that every conversation in the training set has a TopicId).
+	
+Actually I’ve used the n-grams in my model, so in this case, I would write a function which runs a series of word counts and n-grams to create a series of columns on each topic, and create a Topic classification model based on that. One library called ‘Scikit-learn’ can also handle this task easily—it has a bunch of algorithms applying different classifiers to categorization. Once I input my words, I can update the k top possible TopicID of my input, and adjust the recommendation list accordingly.	
+
+3. How would you evaluate if your auto-categorization server is good?
+
+The simplest way would be cross validating the training error and test error and calculating the test accuracy. Read in the lines with manually tagged Topic and Calculate the loss on how many times the server estimate topic correctly. 
+
+4. Processing hundreds of millions of conversations for your autosuggest and auto-categorize models could take a very long time. How could you distribute the processing across multiple machines?
+
+When distributing the processing, the result of processing from one machine's computation should be combined with others.MapReduce is a method that can greatly facilitates programmers to run their own programs on distributed systems without distributed parallel programming. An optional way is to apply an optimal load-balancing structure among the servers, design a low coupling web architecture.

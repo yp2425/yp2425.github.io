@@ -1,0 +1,13 @@
+<form method=post action="">
+<table>
+  {% for field in form %}
+    <tr>
+    <td>{{ field.name }}</td><td>{{ field }}</td>
+    </tr>
+  {% endfor %}
+
+<p>
+{% if result != None %}
+<td>{{ result }}<td>
+{% endif %}
+</p>
